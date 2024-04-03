@@ -8,16 +8,13 @@
     <link href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.css" rel="stylesheet" >
 </head> 
   <body>
-
-    
+   
     <?php 
     include('baglantim.php');
     include('function.php');
     include('navbar.php');
     
     ?>
-
-
     <div class="mx-auto" style="width: 700px;">
         <h1>Üyelik Formu</h1>
       </div>
