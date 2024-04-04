@@ -240,6 +240,7 @@ deneme2.addEventListener('click',uyeGetir)
                                 <td>${value.cep_telefonu}</td>    
                                 <td>${value.sifre}</td>    
                                 <td><button type="button" onclick="dataGetir(${value.id})" class="btn btn-primary" id="${value.id}" >İncele</button></td>    
+                                <td><button type="button" onclick="dataSil(${value.id})" class="btn btn-primary" id="${value.id}" >Sil</button></td> 
                                 </tr>`
     // index ve array kullanmak opsiyoneldir
     })
@@ -277,6 +278,48 @@ deneme2.addEventListener('click',uyeGetir)
     })
     .catch((error) => console.error(error))
   }
+
+
+  
+  function dataSil(id){
+
+    Swal.fire({
+  title: "Are you sure?",
+  text: "You won't be able to revert this!",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#3085d6",
+  cancelButtonColor: "#d33",
+  confirmButtonText: "Yes, delete it!"
+}).then((result) => {
+  if (result.isConfirmed) {
+    axios
+    .delete("uyeler.php",{data: {id}})
+        //res.data.json; // { answer: 42 }
+    .then((response) => {
+        console.log(response.data);
+      const users = response.data;
+      uyeGetir()
+      Swal.fire({
+      title: "Deleted!",
+      text: "Your file has been deleted.",
+      icon: "success"
+    });
+    })
+    .catch((error) => console.error(error))
+
+
+
+   
+  }
+});
+
+
+
+  //  alert(id);
+ 
+  }
+
 
 
 
