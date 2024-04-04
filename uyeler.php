@@ -48,9 +48,15 @@ switch ($_SERVER['REQUEST_METHOD']){
         break;
     
     case 'GET':
-        if(isset($icerik->id)) listele_tek('uyeler',$icerik->id);
-        else if(isset($_GET['id'])) listele_tek('uyeler',$_GET['id']);
-        else listele('uyeler');
+        $response;
+
+        if(isset($icerik->id)) $response = listele_tek('uyeler',$icerik->id);
+        else if(isset($_GET['id'])) $response = listele_tek('uyeler',$_GET['id']);
+        else if(isset($_GET['siralama'])) $response = listeleBK('uyeler');
+        else $response = listele('uyeler');
+        
+        
+        echo json_encode($response);
 
         break;
 

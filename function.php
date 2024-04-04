@@ -54,7 +54,7 @@ function listele_tek($table,$id){
 
     $Response = $query->fetchAll(PDO::FETCH_ASSOC);
 
-    echo json_encode($Response);
+   return $Response;
 
 }
 
@@ -85,6 +85,21 @@ function update($table, $id, $gelenveri) {
     } else {
         return false;
     }
+
+}
+
+
+function listeleBK($table){
+    global $Connection;
+
+    $sql = 'SELECT * FROM ' . $table. ' ORDER BY id DESC';
+    $query = $Connection->prepare($sql);
+    $query->execute();
+
+    $Response = $query->fetchAll(PDO::FETCH_ASSOC);
+
+    return $Response;
+    // echo json_encode($Response);
 
 }
 

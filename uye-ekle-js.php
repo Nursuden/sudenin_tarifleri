@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap demo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.css" rel="stylesheet" >
 </head> 
   <body>
    
@@ -29,6 +28,7 @@
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Ekle</button>
     <button type="button" class="btn btn-primary" id="deneme" onclick="tiklandi()">Deneme</button>
     <button type="button" class="btn btn-primary" id="deneme2" >Deneme 2 </button>
+    <button type="button" class="btn btn-primary" id="deneme3" >29 getir </button>
     <table class="table  table-hover" id="datatable" >
       <thead>
         <tr>
@@ -38,38 +38,15 @@
           <th scope="col">email</th>
           <th scope="col">cep_telefonu</th>
           <th scope="col">şifre</th>
-
-          <th scope="col">İşlem</th>
+         <th scope="col">İşlem</th>
         </tr>
       </thead>
-      <tbody>
-      <?php
-          $uyeler = listele('uyeler');
-      
+      <tbody id="tablo_govde">
+       
 
-          foreach ($uyeler as $uye) {
-          
-        ?> 
-          
-        <tr>
-          <th scope="row"><?=$uye['id']?></th>
-          <td><?=$uye['adi']?></td>
-          <td><?=$uye['soyadi']?></td>
-          <td><?=$uye['email']?></td>
-          <td><?=$uye['cep_telefonu']?></td>
-          <td><?=$uye['sifre']?></td>
-          <td><a  href="duzenle.php?id=<?=$uye['id'] ?>" class="btn btn-primary">İncele</a></td>
-        </tr>
-      
-      <?php } ?>
+         
       </tbody>
   </table>
-
-
-
-
-
-
     </div>
 
 
@@ -90,25 +67,25 @@
         <div class="form-row">
           <div class="col">
             <label for="name">İsim</label>
-            <input type="text" name="adi" class="form-control" placeholder="İsim">
+            <input type="text" name="adi" id="adi" class="form-control" placeholder="İsim">
           </div>
           <div class="col">
             <label for="name">Soyisim</label>
-            <input type="text" name="soyadi" class="form-control" placeholder="Soyisim">
+            <input type="text" name="soyadi" id="soyadi" class="form-control" placeholder="Soyisim">
           </div>
         </div>
         <div class="form-row">
         <div class="form-group col-md-6">
           <label for="inputEmail4">Email</label>
-          <input type="email" name="email" class="form-control" id="inputEmail4" placeholder="Email">
+          <input type="email" name="email" id="email" class="form-control" id="inputEmail4" placeholder="Email">
         </div>
         <div class="form-group col-md-6">
           <label for="tel">Cep Telefonu</label>
-          <input type="tel" name="cep_telefonu" class="form-control" id="tel" placeholder="Cep Telefonu">
+          <input type="tel" name="cep_telefonu" id="cep_telefonu" class="form-control" id="tel" placeholder="Cep Telefonu">
         </div>
         <div class="form-group col-md-6">
           <label for="inputPassword4">Sifre</label>
-          <input type="password" name="sifre" class="form-control" id="inputPassword4" placeholder="Sifre">
+          <input type="password" name="sifre" id="sifre" class="form-control" id="inputPassword4" placeholder="Sifre">
         </div>
       </div><br>
       
@@ -117,6 +94,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-success">Üye Ol</button>
+
       </div>
       </form>
     </div>
@@ -132,8 +110,7 @@
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-
-    <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
+   
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     
@@ -141,20 +118,7 @@
     <script type="text/javascript"> 
 
     // Burası çalışmıyor şu anda 
-
-
-    $( document ).ready(function() {
-    console.log( "ready!" );
-   $('#datatable').DataTable({
-      order: [[0, 'desc']]
-    });
-
-
-//     table.ajax.reload(function (json) {
-//     $('#datatable').val(json.lastInput);
-// });
-
-});     
+ 
 
     // bak bu # işareti buraya özgü bir şey yani yukarıdaki idyi alabilmek için o sebepten yukarı sadece adını ver dopry  burası tarifekle ismiyle aynı sorun olur mu olm
         $("#uyelikForm").submit(function(e) {
@@ -183,7 +147,8 @@
                 timer: 1500
                 })
 
-                location.reload();
+                // location.reload();
+                uyeGetir()
                
                 
                },
@@ -219,15 +184,99 @@
 
 //let deneme2 = document.getElementById('deneme2')
 
-  deneme2.addEventListener('click',function(){
+
+document.addEventListener("DOMContentLoaded", function(event) { 
+  uyeGetir()
+  uye_adi.innerText = 'Hoşgeldiniz Suden Hanım'
+
+  
+});
+
+
+deneme2.addEventListener('click',uyeGetir)
+
+//   deneme2.addEventListener('click',function(){
+//     axios
+//     .get("uyeler.php")
+//     .then((response) => {
+//       const users = response.data;
+
+
+//     users.forEach(function(value, index, array) {
+//         console.log(value.adi);
+//         tablo_govde.innerHTML +=`<tr>
+//                                 <td>${value.id}</td>    
+//                                 <td>${value.adi}</td>    
+//                                 <td>3</td>    
+//                                 <td>4</td>    
+//                                 <td>5</td>    
+//                                 <td>6</td>    
+//                                 <td>7</td>    
+//                                 </tr>`
+//     // index ve array kullanmak opsiyoneldir
+//     })
+
+//       console.log(`GET users`, users);
+ 
+//     })
+//     .catch((error) => console.error(error))
+//   })
+
+  function uyeGetir(){
     axios
-    .get("uyeler.php")
+    .get("uyeler.php?siralama=BK")
     .then((response) => {
+        console.log(response.data);
       const users = response.data;
+      tablo_govde.innerHTML = ''; 
+      users.forEach(function(value, index, array) {
+        console.log(value.adi);
+        
+        tablo_govde.innerHTML +=`<tr>
+                                <td>${value.id}</td>    
+                                <td>${value.adi}</td>    
+                                <td>${value.soyadi}</td>    
+                                <td>${value.email}</td>    
+                                <td>${value.cep_telefonu}</td>    
+                                <td>${value.sifre}</td>    
+                                <td><button type="button" onclick="dataGetir(${value.id})" class="btn btn-primary" id="${value.id}" >İncele</button></td>    
+                                </tr>`
+    // index ve array kullanmak opsiyoneldir
+    })
+
       console.log(`GET users`, users);
+      setTimeout(() => {
+        $('#sonuc').fadeOut();
+        }, 3000);
+
+ 
     })
     .catch((error) => console.error(error))
-  })
+
+  }
+
+  function dataGetir(id){
+  //  alert(id);
+    axios
+    .get("uyeler.php?id=" +id)
+    .then((response) => {
+        console.log(response.data);
+      const users = response.data;
+      
+     uye_adi.innerText=response.data[0].adi;
+     adi.value = response.data[0].adi;
+     soyadi.value = response.data[0].soyadi;
+     email.value = response.data[0].email;
+     cep_telefonu.value = response.data[0].cep_telefonu;
+     sifre.value = response.data[0].sifre;
+
+     $('#exampleModal').modal("show");
+  
+
+ 
+    })
+    .catch((error) => console.error(error))
+  }
 
 
 
