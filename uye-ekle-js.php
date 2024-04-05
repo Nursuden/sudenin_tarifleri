@@ -12,6 +12,8 @@
     include('baglantim.php');
     include('function.php');
     include('navbar.php');
+  //  include('mail.php');
+
     
     ?>
     <div class="mx-auto" style="width: 700px;">
@@ -28,7 +30,7 @@
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Ekle</button>
     <button type="button" class="btn btn-primary" id="deneme" onclick="tiklandi()">Deneme</button>
     <button type="button" class="btn btn-primary" id="deneme2" >Deneme 2 </button>
-    <button type="button" class="btn btn-primary" id="deneme3" >29 getir </button>
+    <button type="button" class="btn btn-primary" id="deneme3" onclick="dataGetir(29)">29 getir </button>
     <table class="table  table-hover" id="datatable" >
       <thead>
         <tr>
