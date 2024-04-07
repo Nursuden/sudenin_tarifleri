@@ -2,7 +2,7 @@
 // header("Content-type: application/json; charset=utf-8");
 	
 
-$Server  = "localhost";           	
+	$Server  = "localhost";           	
 	$DataBase   = "sudenin_tarifleri";
 	$User = "root";
 	$Password = "";

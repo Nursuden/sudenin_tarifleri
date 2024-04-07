@@ -3,9 +3,9 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'PHPMailer/src/Exception.php';
-require 'PHPMailer/src/PHPMailer.php';
-require 'PHPMailer/src/SMTP.php';
+require 'PHPMailer-master/src/Exception.php';
+require 'PHPMailer-master/src/PHPMailer.php';
+require 'PHPMailer-master/src/SMTP.php';
 
 function mailGonder($email,$adi){ 
 
@@ -36,11 +36,12 @@ function mailGonder($email,$adi){
     $variables = array();
     $variables['adsoyad'] = $adi . " " . $soyadi;
     $variables['aktivasyonlinki'] = $ac_Link;
-    $template = file_get_contents($_SERVER['DOCUMENT_ROOT'] . "/MailHTMLs/mail-kart.html");
-    foreach($variables as $key => $value)
+    $template = file_get_contents("mail-kart.html");
+    /*foreach($variables as $key => $value)
     {
         $template = str_replace('{{ '.$key.' }}', $value, $template);
-    }
+    }*/
+    $template = str_replace("{{uye_adi}}",$adi , $template);
     $mail_body = $template;
     $mail->MsgHTML($mail_body);
 
@@ -56,7 +57,9 @@ function mailGonder($email,$adi){
     } else {
         echo '';
     }
-
 }
+
+    mailGonder("nursudenakkaya7@gmail.com","Nursuden");
+    mailGonder("ozgurr.ozdemirr@gmail.com","Ozgur");
 
 ?>

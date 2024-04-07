@@ -1,7 +1,7 @@
 <?php
 include('baglantim.php');
 include('function.php');
-//include('mail.php');
+include('mail.php');
 
 $icerik = json_decode(file_get_contents("php://input"));
 
@@ -16,7 +16,7 @@ switch ($_SERVER['REQUEST_METHOD']){
 
         
         $uye = ekle('uyeler',(Object) $_POST); 
-        //mailGonder($icerik->email,$icerik->adi); 
+        mailGonder($email,$adi); 
        // mailGonder();
 
         echo json_encode(array('Idniz' => $uye,'İşlem' => 'Tamamlandı'));

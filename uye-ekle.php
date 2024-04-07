@@ -13,7 +13,7 @@
     include('baglantim.php');
     include('function.php');
     include('navbar.php');
-    //include('mail.php');
+    include('mail.php');
     
     ?>
     <div class="mx-auto" style="width: 700px;">

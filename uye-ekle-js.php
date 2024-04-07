@@ -12,7 +12,7 @@
     include('baglantim.php');
     include('function.php');
     include('navbar.php');
-  //  include('mail.php');
+    include('mail.php');
 
     
     ?>
